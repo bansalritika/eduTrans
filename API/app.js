@@ -2,6 +2,8 @@ const express = require('express')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 
+const userRouter = require('./router/user.router')
+
 require('dotenv').config()
 
 const app = express()
@@ -15,6 +17,11 @@ mongoose.connect(process.env.mongodbURI)
     ).catch(
         (err) => {console.log(err);}
     )
+
+app.use(express.json())
+app.use(morgan('dev'))
+
+app.use('/user', userRouter)
 
 app.use(async(req, res)=>{
     res.status(404).json({

@@ -9,6 +9,7 @@ const userSignup = async(req, res) => {
     const email = data.email
     const password = data.password
     const confirmpass = data.confirmpass
+    const defaultlang = data.defaultlang
 
     if( !name || !email || !password || !confirmpass){
         res.status(400).json({
@@ -31,8 +32,8 @@ const userSignup = async(req, res) => {
         const newUser = new userModel({
             email,
             name,
-            // userrole: userrole,
-            password: hashedPass
+            password: hashedPass,
+            defaultlang
         })
         //saving new user
         try{
@@ -54,8 +55,6 @@ const userSignup = async(req, res) => {
         })
     }
 }
-
-
 
 const userLogin = async(req, res) => {
     const data = req.body

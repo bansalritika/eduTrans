@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const mongoose = require('mongoose')
 
 const userRouter = require('./router/user.router')
+const videoRouter = require('./router/video.router')
 
 require('dotenv').config()
 
@@ -22,6 +23,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 app.use('/user', userRouter)
+app.use('/video', videoRouter)
 
 app.use(async(req, res)=>{
     res.status(404).json({
